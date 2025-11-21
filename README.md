@@ -1,4 +1,4 @@
-# discord-autoshard
+# discord-autosharding
 
 🚀 Advanced auto-sharding library for Discord bots with multi-library support
 
@@ -16,7 +16,7 @@
 
 ## Installation
 ```bash
-npm install discord-autoshard
+npm install discord-autosharding
 ```
 
 ## Quick Start
