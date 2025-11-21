@@ -1,20 +1,18 @@
 {
-  "name": "discord-autoshard",
-  "version": "1.0.0",
+  "name": "discord-autosharding",
+  "version": "1.0.1",
   "description": "Advanced auto-sharding library for Discord bots with multi-library support",
   "main": "src/index.js",
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint src/**/*.js --fix",
-    "format": "prettier --write \"src/**/*.js\"",
-    "example:basic": "node examples/basic-usage.js",
-    "example:discordjs": "node examples/discord-js-example.js",
-    "example:eris": "node examples/eris-example.js",
-    "example:cluster": "node examples/clustering-example.js"
+  "author": "Tu Nombre wksipk8@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uxoxufe/discord-autoshard.git"
   },
+  "bugs": {
+    "url": "https://github.com/uxoxufe/discord-autoshard/issues"
+  },
+  "homepage": "https://github.com/uxoxufe/discord-autoshard#readme",
   "keywords": [
     "discord",
     "bot",
@@ -25,50 +23,10 @@
     "clustering",
     "scalability"
   ],
-  "author": "Your Name",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yourusername/discord-autoshard.git"
-  },
-  "bugs": {
-    "url": "https://github.com/yourusername/discord-autoshard/issues"
-  },
-  "homepage": "https://github.com/yourusername/discord-autoshard#readme",
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "dependencies": {
-    "eventemitter3": "^5.0.1",
-    "ws": "^8.14.2",
-    "winston": "^3.11.0",
-    "dotenv": "^16.3.1",
-    "chalk": "^4.1.2"
-  },
-  "devDependencies": {
-    "discord.js": "^14.14.1",
-    "eris": "^0.17.2",
-    "discord.io": "^2.5.3",
-    "jest": "^29.7.0",
-    "eslint": "^8.54.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-node": "^11.1.0",
-    "prettier": "^3.1.0",
-    "nodemon": "^3.0.2"
-  },
-  "peerDependencies": {
-    "discord.js": ">=14.0.0",
-    "eris": ">=0.17.0"
-  },
-  "peerDependenciesMeta": {
-    "discord.js": {
-      "optional": true
-    },
-    "eris": {
-      "optional": true
-    },
-    "discord.io": {
-      "optional": true
-    }
-  }
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ]
 }
