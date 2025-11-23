@@ -12,7 +12,7 @@
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/uxoxufe/tiktok-scrapper.git
+git clone https://github.com/dereick-dev/tiktok-scrapper.git
 cd tiktok-api
 ```
 
@@ -108,11 +108,11 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for details.
 
 ## Bug Reports
 
-Found a bug? Please open an issue on [GitHub Issues](https://github.com/uxoxufe/tiktok-api/issues).
+Found a bug? Please open an issue on [GitHub Issues](https://github.com/dereick-dev/tiktok-api/issues).
 
 ## Contact
 
-- GitHub: [@uxoxufe](https://github.com/uxoxufe)
+- GitHub: [@dereick-dev](https://github.com/dereick-dev)
 
 ## Acknowledgments
 
@@ -121,4 +121,4 @@ Found a bug? Please open an issue on [GitHub Issues](https://github.com/uxoxufe/
 
 ---
 
-Made with by uxoxufe
+Made with by dereick-dev
