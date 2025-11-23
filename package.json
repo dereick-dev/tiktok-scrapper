@@ -1,0 +1,32 @@
+{
+  "name": "discord-autosharding",
+  "version": "1.0.1",
+  "description": "Advanced auto-sharding library for Discord bots with multi-library support",
+  "main": "src/index.js",
+  "author": "Tu Nombre wksipk8@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uxoxufe/discord-autoshard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uxoxufe/discord-autoshard/issues"
+  },
+  "homepage": "https://github.com/uxoxufe/discord-autoshard#readme",
+  "keywords": [
+    "discord",
+    "bot",
+    "sharding",
+    "auto-sharding",
+    "discord.js",
+    "eris",
+    "clustering",
+    "scalability"
+  ],
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ]
+}
