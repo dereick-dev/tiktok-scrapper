@@ -1,0 +1,49 @@
+{
+  "name": "tiktok-api",
+  "version": "2.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,json,md}\""
+  },
+  "keywords": [
+    "tiktok",
+    "api",
+    "scraper",
+    "rest-api",
+    "nodejs",
+    "express"
+  ],
+  "author": "uxoxufe",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uxoxufe/tiktok-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uxoxufe/tiktok-api/issues"
+  },
+  "homepage": "https://github.com/uxoxufe/tiktok-api#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express-rate-limit": "^7.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
