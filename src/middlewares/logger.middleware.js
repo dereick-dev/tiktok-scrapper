@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const logger = require('../utils/logger');
 
 const loggerMiddleware = (req, res, next) => {
@@ -26,4 +27,34 @@ const loggerMiddleware = (req, res, next) => {
   next();
 };
 
+=======
+const logger = require('../utils/logger');
+
+const loggerMiddleware = (req, res, next) => {
+  const start = Date.now();
+  
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    const logData = {
+      method: req.method,
+      path: req.path,
+      status: res.statusCode,
+      duration: `${duration}ms`,
+      ip: req.ip || req.connection.remoteAddress,
+      userAgent: req.get('user-agent')
+    };
+
+    if (res.statusCode >= 500) {
+      logger.error('Request failed', logData);
+    } else if (res.statusCode >= 400) {
+      logger.warn('Request error', logData);
+    } else {
+      logger.info('Request completed', logData);
+    }
+  });
+
+  next();
+};
+
+>>>>>>> e27533f87368340f23e3089368ca2dd2d612f331
 module.exports = loggerMiddleware;
