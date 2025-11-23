@@ -1,5 +1,5 @@
 {
-  "name": "tiktok-api",
+  "name": "tiktok-scrapper",
   "version": "2.0.0",
   "main": "index.js",
   "scripts": {
@@ -12,22 +12,20 @@
   },
   "keywords": [
     "tiktok",
-    "api",
     "scraper",
-    "rest-api",
     "nodejs",
     "express"
   ],
-  "author": "uxoxufe",
+  "author": "dereick-dev",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/uxoxufe/tiktok-api.git"
+    "url": "https://github.com/dereick-dev/tiktok-scrapper.git"
   },
   "bugs": {
-    "url": "https://github.com/uxoxufe/tiktok-api/issues"
+    "url": "https://github.com/dereick-dev/tiktok-scrapper/issues"
   },
-  "homepage": "https://github.com/uxoxufe/tiktok-api#readme",
+  "homepage": "https://github.com/dereick-dev/tiktok-scraper#readme",
   "dependencies": {
     "express": "^4.21.2",
     "axios": "^1.7.2",
