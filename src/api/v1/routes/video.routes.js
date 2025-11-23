@@ -3,6 +3,12 @@ const VideoController = require('../controllers/video.controller');
 
 const router = express.Router();
 
+// Trending videos - DEBE ESTAR ANTES de /:username
+router.get('/videos/trending', VideoController.getTrendingVideos);
+
+// Search videos - DEBE ESTAR ANTES de /:username
+router.get('/videos/search', VideoController.searchVideos);
+
 // Get user videos
 router.get('/videos/:username', VideoController.getUserVideos);
 
@@ -11,11 +17,5 @@ router.get('/video/:videoId', VideoController.getVideoById);
 
 // Get video comments
 router.get('/video/:videoId/comments', VideoController.getVideoComments);
-
-// Get trending videos
-router.get('/videos/trending', VideoController.getTrendingVideos);
-
-// Search videos
-router.get('/videos/search', VideoController.searchVideos);
 
 module.exports = router;
