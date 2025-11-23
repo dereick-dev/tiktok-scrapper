@@ -20,19 +20,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.json({
-    success: true,
-    name: 'TikTok API',
-    version: config.VERSION,
-    status: 'online',
     endpoints: {
       v1: {
         user: '/api/v1/user/:username',
         videos: '/api/v1/videos/:username',
         hashtag: '/api/v1/hashtag/:tag'
       }
-    },
-    documentation: '/docs',
-    health: '/health'
+    }
   });
 });
 
