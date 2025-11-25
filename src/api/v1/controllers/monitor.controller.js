@@ -6,27 +6,18 @@ const { ValidationError } = require('../../../utils/errors');
 const logger = require('../../../utils/logger');
 
 class MonitorController {
-  /**
-   * Add a user profile to monitor
-   * POST /api/v1/monitor/add
-   */
   static async addMonitor(req, res, next) {
     try {
       const { username, checkInterval = 300000, notificationEmail, discordGuildId, discordChannelId } = req.body;
 
-      // Validate username
       const userValidation = UserValidator.isValidUsername(username);
-      if (!userValidation.valid) {
-        throw new ValidationError(userValidation.error);
-      }
+      if (!userValidation.valid) throw new ValidationError(userValidation.error);
 
-      // Validate check interval (min 5 minutes, max 24 hours)
       const interval = parseInt(checkInterval);
       if (isNaN(interval) || interval < 300000 || interval > 86400000) {
         throw new ValidationError('Check interval must be between 5 minutes (300000ms) and 24 hours (86400000ms)');
       }
 
-      // Validate email if provided
       if (notificationEmail) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(notificationEmail)) {
@@ -44,41 +35,29 @@ class MonitorController {
         discordChannelId
       });
 
-      return ResponseHandler.success(res, monitor, 'Monitor added successfully');
-
+      return ResponseHandler.success(res, 201, 'Monitor added successfully', monitor);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Remove a user profile from monitoring
-   * DELETE /api/v1/monitor/:username
-   */
   static async removeMonitor(req, res, next) {
     try {
       const { username } = req.params;
 
       const userValidation = UserValidator.isValidUsername(username);
-      if (!userValidation.valid) {
-        throw new ValidationError(userValidation.error);
-      }
+      if (!userValidation.valid) throw new ValidationError(userValidation.error);
 
       logger.info(`Removing monitor for user: @${userValidation.username}`);
 
       const result = await MonitorService.removeMonitor(userValidation.username);
 
-      return ResponseHandler.success(res, result, 'Monitor removed successfully');
-
+      return ResponseHandler.success(res, 200, 'Monitor removed successfully', result);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Get all monitored profiles
-   * GET /api/v1/monitor/list
-   */
   static async listMonitors(req, res, next) {
     try {
       const { guildId } = req.query;
@@ -87,60 +66,43 @@ class MonitorController {
 
       let monitors = await MonitorService.listMonitors();
 
-      // Filter by guild if provided
       if (guildId) {
         monitors = monitors.filter(m => m.discordGuildId === guildId);
       }
 
-      return ResponseHandler.success(res, monitors);
-
+      return ResponseHandler.success(res, 200, 'OK', monitors);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Get details of a specific monitor
-   * GET /api/v1/monitor/:username
-   */
   static async getMonitor(req, res, next) {
     try {
       const { username } = req.params;
 
       const userValidation = UserValidator.isValidUsername(username);
-      if (!userValidation.valid) {
-        throw new ValidationError(userValidation.error);
-      }
+      if (!userValidation.valid) throw new ValidationError(userValidation.error);
 
       logger.info(`Fetching monitor details for: @${userValidation.username}`);
 
       const monitor = await MonitorService.getMonitor(userValidation.username);
 
-      return ResponseHandler.success(res, monitor);
-
+      return ResponseHandler.success(res, 200, 'OK', monitor);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Get new videos detected by monitor
-   * GET /api/v1/monitor/:username/new-videos
-   */
   static async getNewVideos(req, res, next) {
     try {
       const { username } = req.params;
       const { limit = 10 } = req.query;
 
       const userValidation = UserValidator.isValidUsername(username);
-      if (!userValidation.valid) {
-        throw new ValidationError(userValidation.error);
-      }
+      if (!userValidation.valid) throw new ValidationError(userValidation.error);
 
       const limitValidation = UserValidator.validateLimit(limit);
-      if (!limitValidation.valid) {
-        throw new ValidationError(limitValidation.error);
-      }
+      if (!limitValidation.valid) throw new ValidationError(limitValidation.error);
 
       logger.info(`Fetching new videos for monitored user: @${userValidation.username}`);
 
@@ -149,50 +111,36 @@ class MonitorController {
         limitValidation.limit
       );
 
-      return ResponseHandler.success(res, newVideos);
-
+      return ResponseHandler.success(res, 200, 'OK', newVideos);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Manually trigger a check for a monitored profile
-   * POST /api/v1/monitor/:username/check
-   */
   static async manualCheck(req, res, next) {
     try {
       const { username } = req.params;
 
       const userValidation = UserValidator.isValidUsername(username);
-      if (!userValidation.valid) {
-        throw new ValidationError(userValidation.error);
-      }
+      if (!userValidation.valid) throw new ValidationError(userValidation.error);
 
       logger.info(`Manual check triggered for: @${userValidation.username}`);
 
       const result = await MonitorService.checkForNewVideos(userValidation.username);
 
-      return ResponseHandler.success(res, result);
-
+      return ResponseHandler.success(res, 200, 'OK', result);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Update monitor settings
-   * PUT /api/v1/monitor/:username
-   */
   static async updateMonitor(req, res, next) {
     try {
       const { username } = req.params;
       const { checkInterval, notificationEmail, enabled, discordChannelId } = req.body;
 
       const userValidation = UserValidator.isValidUsername(username);
-      if (!userValidation.valid) {
-        throw new ValidationError(userValidation.error);
-      }
+      if (!userValidation.valid) throw new ValidationError(userValidation.error);
 
       const updates = {};
 
@@ -226,17 +174,12 @@ class MonitorController {
 
       const monitor = await MonitorService.updateMonitor(userValidation.username, updates);
 
-      return ResponseHandler.success(res, monitor, 'Monitor updated successfully');
-
+      return ResponseHandler.success(res, 200, 'Monitor updated successfully', monitor);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Get monitor statistics
-   * GET /api/v1/monitor/stats
-   */
   static async getStats(req, res, next) {
     try {
       const { guildId } = req.query;
@@ -245,17 +188,12 @@ class MonitorController {
 
       const stats = await MonitorService.getStats(guildId);
 
-      return ResponseHandler.success(res, stats);
-
+      return ResponseHandler.success(res, 200, 'OK', stats);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Get pending notifications (for Discord bot to poll)
-   * GET /api/v1/monitor/pending
-   */
   static async getPendingNotifications(req, res, next) {
     try {
       const { guildId } = req.query;
@@ -264,17 +202,12 @@ class MonitorController {
 
       const pending = await MonitorService.getPendingNotifications(guildId);
 
-      return ResponseHandler.success(res, pending);
-
+      return ResponseHandler.success(res, 200, 'OK', pending);
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Mark notifications as sent
-   * POST /api/v1/monitor/mark-sent
-   */
   static async markNotificationsSent(req, res, next) {
     try {
       const { notificationIds } = req.body;
@@ -287,8 +220,7 @@ class MonitorController {
 
       await MonitorService.markNotificationsSent(notificationIds);
 
-      return ResponseHandler.success(res, { marked: notificationIds.length });
-
+      return ResponseHandler.success(res, 200, 'OK', { marked: notificationIds.length });
     } catch (error) {
       next(error);
     }
